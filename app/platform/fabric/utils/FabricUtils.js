@@ -168,6 +168,13 @@ function getPEMfromConfig(config) {
 				logger.error(e);
 			}
 		}
+		if (config.pem) {
+			try {
+				result = utils.normalizeX509(config.pem);
+			} catch (e) {
+				logger.error(e);
+			}
+		}
 	}
 
 	return result;
