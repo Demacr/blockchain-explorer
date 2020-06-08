@@ -176,13 +176,13 @@ class FabricGateway {
 	 *
 	 */
 	async enrollUserIdentity(userName, signedCertPath, adminPrivateKeyPath, signedCertPem, adminPrivateKeyPem) {
-		if (signedCertPath && adminPrivateKeyPath) {
+		if (typeof signedCertPath !== 'undefined' && typeof adminPrivateKeyPath !== 'undefined') {
 			const _signedCertPath = signedCertPath;
 			const _adminPrivateKeyPath = adminPrivateKeyPath;
 			const cert = fs.readFileSync(_signedCertPath, 'utf8');
 			// See in first-network-connection.json adminPrivateKey key
 			const key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
-		} else if (signedCertPem && adminPrivateKeyPem) {
+		} else if (typeof signedCertPem !== 'undefined' && typeof adminPrivateKeyPem !== 'undefined') {
 			const cert = signedCertPem
 			const key = adminPrivateKeyPem
 		};
