@@ -64,6 +64,8 @@ class FabricGateway {
 		let orgMsp;
 		let signedCertPath;
 		let adminPrivateKeyPath;
+		let signedCertPem;
+		let adminPrivateKeyPem;
 		logger.log('========== > defaultPeer ', this.defaultPeer);
 		/* eslint-disable */
 		({
@@ -180,8 +182,7 @@ class FabricGateway {
 			const cert = fs.readFileSync(_signedCertPath, 'utf8');
 			// See in first-network-connection.json adminPrivateKey key
 			const key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
-		};
-		if (signedCertPem && adminPrivateKeyPem) {
+		} else if (signedCertPem && adminPrivateKeyPem) {
 			const cert = signedCertPem
 			const key = adminPrivateKeyPem
 		};
