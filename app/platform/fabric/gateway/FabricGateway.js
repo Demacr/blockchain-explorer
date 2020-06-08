@@ -69,7 +69,9 @@ class FabricGateway {
 		({
 			orgMsp,
 			adminPrivateKeyPath,
-			signedCertPath
+			signedCertPath,
+			adminPrivateKeyPem,
+			signedCertPem
 		} = this.fabricConfig.getOrganizationsConfig());
 		logger.log(
 			'orgMsp :',
@@ -109,7 +111,9 @@ class FabricGateway {
 				identity = this.enrollUserIdentity(
 					this.fabricConfig.getAdminUser(),
 					signedCertPath,
-					adminPrivateKeyPath
+					adminPrivateKeyPath,
+					signedCertPem,
+					adminPrivateKeyPem
 				);
 			}
 
@@ -169,12 +173,18 @@ class FabricGateway {
 	 * @private method
 	 *
 	 */
-	async enrollUserIdentity(userName, signedCertPath, adminPrivateKeyPath) {
-		const _signedCertPath = signedCertPath;
-		const _adminPrivateKeyPath = adminPrivateKeyPath;
-		const cert = fs.readFileSync(_signedCertPath, 'utf8');
-		// See in first-network-connection.json adminPrivateKey key
-		const key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
+	async enrollUserIdentity(userName, signedCertPath, adminPrivateKeyPath, signedCertPem, adminPrivateKeyPem) {
+		if (signedCertPath && adminPrivateKeyPath) {
+			const _signedCertPath = signedCertPath;
+			const _adminPrivateKeyPath = adminPrivateKeyPath;
+			const cert = fs.readFileSync(_signedCertPath, 'utf8');
+			// See in first-network-connection.json adminPrivateKey key
+			const key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
+		};
+		if (signedCertPem && adminPrivateKeyPem) {
+			const cert = signedCertPem
+			const key = adminPrivateKeyPem
+		};
 		const identity = {
 			credentials: {
 				certificate: cert,

@@ -186,9 +186,11 @@ class FabricConfig {
 
 		const orgMsp = organization.mspid;
 		const adminPrivateKeyPath = organization.adminPrivateKey.path;
+		const adminPrivateKeyPem  = organization.adminPrivateKey.pem;
 		const signedCertPath = organization.signedCert.path;
+		const signedCertPem = organization.signedCert.pem
 
-		return { orgMsp, adminPrivateKeyPath, signedCertPath };
+		return { orgMsp, adminPrivateKeyPath, signedCertPath, adminPrivateKeyPem, signedCertPem };
 	}
 
 	/**
