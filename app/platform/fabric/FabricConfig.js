@@ -185,11 +185,26 @@ class FabricConfig {
 		const organization = this.config.organizations[this.getOrganization()];
 
 		const orgMsp = organization.mspid;
-		const adminPrivateKeyPath = organization.adminPrivateKey.path;
-		const adminPrivateKeyPem  = organization.adminPrivateKey.pem;
-		const signedCertPath = organization.signedCert.path;
-		const signedCertPem = organization.signedCert.pem
-
+		if (typeof organization.adminPrivateKey.path !== 'undefined') {
+			const adminPrivateKeyPath = organization.adminPrivateKey.path;
+		} else {
+			const adminPrivateKeyPath = null;
+		};
+		if (typeof organization.adminPrivateKey.pem !== 'undefined') {
+			const adminPrivateKeyPem = organization.adminPrivateKey.pem;
+		} else {
+			const adminPrivateKeyPem = null;
+		};
+		if (typeof organization.signedCert.path !== 'undefined') {
+			const signedCertPath = organization.signedCert.path;
+		} else {
+			const signedCertPath = null;
+		};
+		if (typeof organization.signedCert.pem !== 'undefined') {
+			const signedCertPem = organization.signedCert.pem;
+		} else {
+			const signedCertPem = null;
+		};
 		return { orgMsp, adminPrivateKeyPath, signedCertPath, adminPrivateKeyPem, signedCertPem };
 	}
 
