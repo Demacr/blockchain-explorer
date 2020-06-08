@@ -176,15 +176,17 @@ class FabricGateway {
 	 *
 	 */
 	async enrollUserIdentity(userName, signedCertPath, adminPrivateKeyPath, signedCertPem, adminPrivateKeyPem) {
+		let cert;
+		let key;
 		if (signedCertPath && adminPrivateKeyPath) {
 			const _signedCertPath = signedCertPath;
 			const _adminPrivateKeyPath = adminPrivateKeyPath;
-			const cert = fs.readFileSync(_signedCertPath, 'utf8');
+			cert = fs.readFileSync(_signedCertPath, 'utf8');
 			// See in first-network-connection.json adminPrivateKey key
-			const key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
+			key = fs.readFileSync(_adminPrivateKeyPath, 'utf8');
 		} else if (signedCertPem && adminPrivateKeyPem) {
-			const cert = signedCertPem
-			const key = adminPrivateKeyPem
+			cert = signedCertPem
+			key = adminPrivateKeyPem
 		};
 		const identity = {
 			credentials: {
